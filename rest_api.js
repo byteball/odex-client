@@ -31,7 +31,7 @@ const fetchInfo = async () => {
 	const response = await request(`/info`)
 
 	if (response.status !== 200) {
-		throw new Error('Error')
+		throw new Error('non-200 status from /info: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -42,7 +42,7 @@ const fetchFees = async () => {
 	const response = await request('/fees')
 
 	if (response.status !== 200) {
-		throw new Error('Error')
+		throw new Error('non-200 status from /fees: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -53,7 +53,7 @@ const fetchTokens = async (listed = '') => {
 	const response = await request(`/tokens?listed=${listed}`)
 
 	if (response.status !== 200) {
-		throw new Error('Error')
+		throw new Error('non-200 status from /tokens: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -64,7 +64,7 @@ const fetchToken = async (asset) => {
 	const response = await request(`/tokens/${encodeURIComponent(asset)}`)
 
 	if (response.status !== 200) {
-		throw new Error('Error')
+		throw new Error('non-200 status from /tokens: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -75,7 +75,7 @@ const fetchPairs = async (listed = '') => {
 	const response = await request(`/pairs?listed=` + listed)
 
 	if (response.status !== 200) {
-		throw new Error('Error')
+		throw new Error('non-200 status from /pairs: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -92,7 +92,7 @@ const fetchPair = async (baseToken, quoteToken) => {
 	}
 
 	if (response.status !== 200) {
-		throw new Error('Server Error')
+		throw new Error('non-200 status from /pair: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -109,7 +109,7 @@ const fetchOrders = async (address) => {
 	}
 
 	if (response.status !== 200) {
-		throw new Error('Server error')
+		throw new Error('non-200 status from /orders: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -125,7 +125,7 @@ const fetchOrderHistory = async (address) => {
 	}
 
 	if (response.status !== 200) {
-		throw new Error('Server error')
+		throw new Error('non-200 status from /orders/history: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -141,7 +141,7 @@ const fetchCurrentOrders = async (address) => {
 	}
 
 	if (response.status !== 200) {
-		throw new Error('Server error')
+		throw new Error('non-200 status from /orders/current: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -158,7 +158,7 @@ const fetchTokenPairTrades = async (baseToken, quoteToken) => {
 	}
 
 	if (response.status !== 200) {
-		throw new Error('Server Error')
+		throw new Error('non-200 status from /trades/pair: ' + response.status)
 	}
 
 	return data
@@ -174,7 +174,7 @@ const fetchAddressTrades = async (address) => {
 	}
 
 	if (response.status !== 200) {
-		throw new Error('Server Error')
+		throw new Error('non-200 status from /trades: ' + response.status)
 	}
 
 	return data
@@ -189,7 +189,7 @@ const fetchOrderBook = async (baseToken, quoteToken) => {
 	}
 
 	if (response.status !== 200) {
-		throw new Error('Server Error')
+		throw new Error('non-200 status from /orderbook: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -205,7 +205,7 @@ const fetchRawOrderBook = async (baseToken, quoteToken) => {
 	}
 
 	if (response.status !== 200) {
-		throw new Error('Server Error')
+		throw new Error('non-200 status from /orderbook/raw: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -221,7 +221,7 @@ const fetchTokenPairData = async () => {
 	}
 
 	if (response.status !== 200) {
-		throw new Error('Server error')
+		throw new Error('non-200 status from /pairs/data: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -249,7 +249,7 @@ const createAccount = async (address) => {
 	}
 
 	if (response.status !== 200) {
-		throw new Error('Server error')
+		throw new Error('non-200 status from /account/create: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -265,7 +265,7 @@ const getBalances = async (address) => {
 	}
 
 	if (response.status !== 200) {
-		throw new Error('Server error')
+		throw new Error('non-200 status from /account/balances/: ' + response.status)
 	}
 
 	const { data } = await response.json()
@@ -278,7 +278,7 @@ const checkToken = async(asset) => {
 	const response = await request(`/tokens/check/${asset}`)
 
 	if (response.status !== 200) {
-		throw new Error('Error')
+		throw new Error('non-200 status from /tokens/check: ' + response.status)
 	}
 
 	const { data } = await response.json()
