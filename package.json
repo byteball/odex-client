@@ -1,0 +1,14 @@
+{
+	"name": "odex-client",
+	"version": "1.0.0",
+	"description": "ODEX trading bot",
+	"main": "index.js",
+	"repository": "https://github.com/byteball/odex-client.git",
+	"author": "tony",
+	"license": "MIT",
+	"dependencies": {
+		"headless-obyte": "git+https://github.com/byteball/headless-obyte.git#aa",
+		"node-fetch": "^2.6.0",
+		"ocore": "git+https://github.com/byteball/ocore.git#rocks-and-formulas"
+	}
+}
