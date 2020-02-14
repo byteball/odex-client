@@ -32,8 +32,9 @@ exports.from_email = '';
 exports.owner_address = '';
 
 // websocket URL of ODEX node we are are connecting to
-exports.odex_ws_url = 'wss://odex.ooo/socket';
-exports.odex_http_url = 'https://odex.ooo';
+const testnet_domain = process.env.testnet ? 'testnet.' : '';
+exports.odex_ws_url = 'wss://' + testnet_domain + 'odex.ooo/socket';
+exports.odex_http_url = 'https://' + testnet_domain + 'odex.ooo/api';
 
 exports.MAX_PRICE_PRECISION = 8;
 exports.aa_address = 'FVRZTCFXIDQ3EYRGQSLE5AMWUQF4PRYJ';
