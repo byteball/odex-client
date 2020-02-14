@@ -149,7 +149,7 @@ const fetchCurrentOrders = async (address) => {
 }
 
 const fetchTokenPairTrades = async (baseToken, quoteToken) => {
-	const response = await request(`/trades/pair?baseToken=${baseToken}&quoteToken=${quoteToken}`)
+	const response = await request(`/trades/pair?baseToken=${encodeURIComponent(baseToken)}&quoteToken=${encodeURIComponent(quoteToken)}`)
 	const data = await response.json()
 
 	if (response.status === 400) {
@@ -181,7 +181,7 @@ const fetchAddressTrades = async (address) => {
 }
 
 const fetchOrderBook = async (baseToken, quoteToken) => {
-	const response = await request(`/orderbook?baseToken=${baseToken}&quoteToken=${quoteToken}`)
+	const response = await request(`/orderbook?baseToken=${encodeURIComponent(baseToken)}&quoteToken=${encodeURIComponent(quoteToken)}`)
 
 	if (response.status === 400) {
 		const { error } = await response.json()
@@ -197,7 +197,7 @@ const fetchOrderBook = async (baseToken, quoteToken) => {
 }
 
 const fetchRawOrderBook = async (baseToken, quoteToken) => {
-	const response = await request(`/orderbook/raw?baseToken=${baseToken}&quoteToken=${quoteToken}`)
+	const response = await request(`/orderbook/raw?baseToken=${encodeURIComponent(baseToken)}&quoteToken=${encodeURIComponent(quoteToken)}`)
 
 	if (response.status === 400) {
 		const { error } = await response.json()
@@ -275,7 +275,7 @@ const getBalances = async (address) => {
 
 
 const checkToken = async(asset) => {
-	const response = await request(`/tokens/check/${asset}`)
+	const response = await request(`/tokens/check/${encodeURIComponent(asset)}`)
 
 	if (response.status !== 200) {
 		throw new Error('non-200 status from /tokens/check: ' + response.status)
