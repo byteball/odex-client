@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const signing = require('./signing.js');
 const exchange = require('./exchange.js');
 const conf = require('ocore/conf');
+const formulaCommon = require('ocore/formula/common.js');
 const account = require('./account.js');
 const ws_api = require('./ws_api.js');
 const rest_api = require('./rest_api.js');
@@ -108,6 +109,12 @@ async function createOrderInAssets(order_info) {
 	return signedOrder;
 }
 
+function getOrderHash(signedOrder) {
+	const order_data = signedOrder.signed_message;
+	let str = order_data.address + order_data.sell_asset + order_data.buy_asset + order_data.sell_amount + formulaCommon.toOscriptPrecision(order_data.price) + (order_data.nonce || '') + (signedOrder.last_ball_unit || '-');
+	return crypto.createHash("sha256").update(str, "utf8").digest("base64");
+}
+
 async function createCancel(hash) {
 	let signedCancel = await signing.signMessage('Cancel order ' + hash);
 	return signedCancel;
@@ -117,6 +124,7 @@ async function createCancel(hash) {
 async function createAndSendOrder(pair, side, amount, price, matcher) {
 	let signedOrder = await createOrder(pair, side, amount, price, matcher);
 	await ws_api.sendOrder(signedOrder);
+	return getOrderHash(signedOrder);
 }
 
 async function createAndSendCancel(hash) {
@@ -166,6 +174,9 @@ async function trackMyOrders() {
 	});
 	await initMyOrders();
 }
+
+
+exports.getOrderHash = getOrderHash;
 
 exports.createOrder = createOrder;
 exports.createCancel = createCancel;
