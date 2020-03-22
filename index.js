@@ -5,6 +5,7 @@ const chat = require('./chat.js');
 const ws_api = require('./ws_api.js');
 const rest_api = require('./rest_api.js');
 const orders = require('./orders.js');
+const balances = require('./balances.js');
 const exchange = require('./exchange.js');
 const headlessWallet = require('headless-obyte');
 
@@ -24,5 +25,6 @@ exports.ws_api = ws_api;
 exports.rest_api = rest_api;
 exports.exchange = exchange;
 exports.orders = orders;
+exports.balances = balances;
 exports.chat = chat;
 exports.account = account;
