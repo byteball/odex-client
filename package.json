@@ -7,8 +7,8 @@
 	"author": "tony",
 	"license": "MIT",
 	"dependencies": {
-		"headless-obyte": "git+https://github.com/byteball/headless-obyte.git#aa",
+		"headless-obyte": "git+https://github.com/byteball/headless-obyte.git",
 		"node-fetch": "^2.6.0",
-		"ocore": "git+https://github.com/byteball/ocore.git#rocks-and-formulas"
+		"ocore": "git+https://github.com/byteball/ocore.git"
 	}
 }
