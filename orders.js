@@ -149,6 +149,16 @@ async function initMyOrders() {
 	});
 }
 
+async function resetMyOrders() {
+	console.log("resetting my orders");
+	let my_orders = await rest_api.fetchCurrentOrders(account.getAddress());
+	for (let hash in assocMyOrders)
+		delete assocMyOrders[hash];
+	my_orders.forEach(order => {
+		assocMyOrders[order.hash] = order;
+	});
+}
+
 async function trackMyOrders() {
 	if (bTrackingOrders) // already tracking, don't duplicate event handlers
 		return;
@@ -172,7 +182,12 @@ async function trackMyOrders() {
 				break;
 		}
 	});
-	await initMyOrders();
+	if (ws_api.isConnected()) // we've already missed 'connected' event
+		await initMyOrders();
+	ws_api.on('connected', async () => {
+		await resetMyOrders();
+		ws_api.emit('reset_orders');
+	});
 }
 
 

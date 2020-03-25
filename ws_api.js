@@ -63,6 +63,7 @@ class WsEmitter extends EventEmitter {
 			console.log('connected');
 			finishConnection(this);
 			self.sendAddress(account.getOwnerAddress());
+			self.emit('connected');
 		});
 
 		self.ws.on('close', function onWsClose() {
@@ -71,6 +72,7 @@ class WsEmitter extends EventEmitter {
 			self.ws = null;
 			setTimeout(self.connect.bind(self), 1000);
 			finishConnection(this, 'closed');
+			self.emit('disconnected');
 		});
 
 		self.ws.on('error', function onWsError(e) {
@@ -109,6 +111,10 @@ class WsEmitter extends EventEmitter {
 		let channel = objMessage.channel;
 	//	console.log('received from ODEX parsed:', objMessage);
 		this.emit(channel, type, payload);
+	}
+
+	isConnected() {
+		return (this.ws && this.ws.readyState === this.ws.OPEN);
 	}
 
 	async send(message) {
