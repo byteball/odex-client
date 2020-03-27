@@ -7,6 +7,14 @@ let assocBalances = null;
 
 ws_api.on('balances', (type, payload) => {
 	console.error('---- received balances', type, payload);
+	if (assocBalances) {
+		let deltas = {};
+		for (let symbol in assocBalances)
+			if (assocBalances[symbol] !== payload.balances[symbol])
+				deltas[symbol] = payload.balances[symbol] - assocBalances[symbol];
+		if (Object.keys(deltas).length > 0)
+			console.error('----- balance deltas: ', deltas);
+	}
 	assocBalances = payload.balances;
 });
 
