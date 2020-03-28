@@ -168,7 +168,8 @@ async function trackMyOrders() {
 		switch (type) {
 			case 'ORDER_ADDED':
 				var order = payload;
-				assocMyOrders[order.hash] = order;
+				if (order.status === 'OPEN' || order.status === 'PARTIAL_FILLED')
+					assocMyOrders[order.hash] = order;
 				break;
 			case 'ORDER_CANCELLED':
 				var order = payload;
