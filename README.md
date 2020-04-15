@@ -54,6 +54,33 @@ Config options are read from conf.js in your project root or conf.json in its da
 
 To start with, copy conf.js from odex-client (this repo) to your project root and edit if necessary.
 
+## Trading balances
+
+The library includes an Obyte wallet that holds your trading balances. You need to deposit funds to this wallet before trading.
+
+To manage the wallet, first edit your conf.js or conf.json and add the device address of your GUI Obyte wallet in `control_addresses` array in conf. 
+```js
+exports.control_addresses = ['your device address here'];
+```
+```json
+"control_addresses": ["your device address here"],
+```
+You can find the device address of your GUI wallet under burger menu / Settings.
+
+Next, start your bot that includes this library, it will print the wallet's paring code to the screen:
+```
+====== my pairing code: Aj2No4YghYNcHjzPqobfp5gSJ4jyaBqnhF2dK7lEsMZ+@obyte.org/bb#0000
+```
+Use this code to pair your GUI Obyte wallet to the bot and manage it. The bot recognizes the following commands:
+* **exchange balance** - query the bot's balance on the exchange;
+* **deposit \<amount> \<token>** - deposit tokens;
+* **withdraw \<amount> \<token>** - withdraw tokens;
+* **withdraw all \<token>** - withdraw the entire balance of a token;
+* **help** - print the list of commands.
+
+Refer to [headless wallet documentation](https://github.com/byteball/headless-obyte#remote-control) for other chat commands you can give to the bot.
+
+
 ## Help
 
 \#tech channel on discord https://discord.obyte.org.

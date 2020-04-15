@@ -40,6 +40,16 @@ function start() {
 		if (!headlessWallet.isControlAddress(from_address))
 			return sendResponse("This bot can be managed only from control addresses.  If you are the owner, add your device address to the list of control addresses in conf.js or conf.json.");
 		
+		if (text === 'help') {
+			let lines = [
+				"[exchange balance](command:exchange balance) - query the bot's balance on the exchange;",
+				"[deposit <amount> <token>](suggest-command:deposit <amount> <token>) - deposit tokens;",
+				"[withdraw <amount> <token>](suggest-command:withdraw <amount> <token>) - withdraw tokens;",
+				"[withdraw all <token>](suggest-command:withdraw all <token>) - withdraw the entire balance of a token.",
+			];
+			return sendResponse(lines.join("\n"));
+		}
+
 		if (text === 'exchange balance') {
 			let balances = await rest_api.getBalances(account.getAddress());
 			let lines = [];
