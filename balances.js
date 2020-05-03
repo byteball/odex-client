@@ -21,7 +21,7 @@ ws_api.on('balances', (type, payload) => {
 async function getBalances() {
 	if (assocBalances)
 		return assocBalances;
-	assocBalances = await rest_api.getBalances(account.getAddress());
+	assocBalances = await rest_api.getBalances(account.getOwnerAddress());
 	return assocBalances;
 }
 
