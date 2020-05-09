@@ -134,7 +134,7 @@ async function createAndSendCancel(hash) {
 
 
 function updateMyOrder(order) {
-	if (order.originalOrder.address !== account.getOwnerAddress())
+	if (order.originalOrder.signed_message.address !== account.getOwnerAddress())
 		return;
 	if (order.status === 'FILLED')
 		delete assocMyOrders[order.hash];
