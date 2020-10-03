@@ -59,6 +59,8 @@ class WsEmitter extends EventEmitter {
 				return;
 			}
 			clearTimeout(timeout);
+			if (!self.ws)
+				return console.log("received open event on null ws");
 			self.ws.last_ts = Date.now();
 			console.log('connected');
 			finishConnection(this);
