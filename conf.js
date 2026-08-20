@@ -37,4 +37,4 @@ exports.odex_ws_url = 'wss://' + testnet_domain + 'odex.ooo/socket';
 exports.odex_http_url = 'https://' + testnet_domain + 'odex.ooo/api';
 
 exports.MAX_PRICE_PRECISION = 8;
-exports.aa_address = 'FVRZTCFXIDQ3EYRGQSLE5AMWUQF4PRYJ';
+exports.aa_address = 'ODEX5NGJKLKAWJYJ7JILB6AQQKOCJ34W';
